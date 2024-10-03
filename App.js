@@ -4,6 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import WelcomeScreen from './components/WelcomeScreen';
 import HomeScreen from './components/HomeScreen';
+import CartScreen from './components/CartScreen'; 
+import ProfileScreen from './components/ProfileScreen'; 
 import { name as shambayetu } from './app.json'; // Correct import from app.json
 
 const Stack = createStackNavigator();
@@ -21,6 +23,16 @@ const App = () => {
           name="Home" 
           component={HomeScreen} 
           options={{ headerShown: false }} 
+        />
+         <Stack.Screen
+          name="Cart"
+          component={CartScreen}
+          options={{ title: 'Cart' }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{ title: 'Profile' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

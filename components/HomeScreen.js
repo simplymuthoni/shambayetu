@@ -1,174 +1,157 @@
 import React from 'react';
-import { View, Text, Image, TextInput, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
-import Carousel from 'react-native-snap-carousel';
+import { View, Text, TextInput, Image, TouchableOpacity, ScrollView, StyleSheet, Dimensions } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-const data = [
-  { id: '1', image: require('../assets/meat.png'), caption: 'Meat and meat products' },
-  { id: '2', image: require('../assets/milk.png'), caption: 'Eggs and Dairy Products' },
-  { id: '3', image: require('../assets/veggies.png'), caption: 'Green Veggies' },
-  { id: '4', image: require('../assets/cereals.png'), caption: 'Cereals' },
-  { id: '5', image: require('../assets/mkulima4.png'), caption: 'Local Farmer' },
-  { id: '6', image: require('../assets/mkulima3.png'), caption: 'Local Farmer' },
-  { id: '7', image: require('../assets/mkulima1.png'), caption: 'Local Farmer' }
-];
+const { width } = Dimensions.get('window');
 
-const HomeScreen = () => {
-  const renderItem = ({ item }) => (
-    <View style={styles.carouselItem}>
-      <Image source={item.image} style={styles.carouselImage} />
-      <Text style={styles.carouselCaption}>{item.caption}</Text>
-    </View>
-  );
-
+const HomeScreen = ({ navigation }) => {
   return (
-    <ImageBackground
-      source={require('../assets/b1.png')} // Background image
-      style={styles.background}
-    >
-      <View style={styles.container}>
-        {/* Header */}
-        <View style={styles.header}>
-          <Image source={require('../assets/logo1.png')} style={styles.logo} />
-          <Text style={styles.headerText}>ShambaYetu</Text>
-          <TouchableOpacity style={styles.cartIcon}>
-            <Image source={require('../assets/cart.png')} style={styles.cartImage} />
-          </TouchableOpacity>
-        </View>
+    <View style={styles.container}>
+      {/* Header Section */}
+      <View style={styles.header}>
+        <Image source={require('../assets/logo1.png')} style={styles.logo} />
+        <Text style={styles.title}>ShambaYetu</Text>
+        <TouchableOpacity style={styles.cartButton}>
+          <Image source={require('../assets/cart.png')} style={styles.cartIcon} />
+        </TouchableOpacity>
+      </View>
 
-        {/* Search Bar */}
-        <View style={styles.searchContainer}>
-          <Image source={require('../assets/search.png')} style={styles.searchIcon} />
-          <TextInput
-            style={styles.searchBar}
-            placeholder="Search here"
-            placeholderTextColor="#000"
-          />
-        </View>
+      {/* Search Bar */}
+      <View style={styles.searchContainer}>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search here"
+          placeholderTextColor="#A5A5A5"
+        />
+        <TouchableOpacity>
+          <Ionicons name="search" size={20} color="#A5A5A5" />
+        </TouchableOpacity>
+      </View>
 
-        {/* Carousel 1 */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Buy Products straight from the farmer:</Text>
-          <Carousel
-            data={data.slice(0, 4)} // First 4 items
-            renderItem={renderItem}
-            sliderWidth={350}
-            itemWidth={300}
-            loop={true}
-            layout={'default'}
-          />
+      {/* Categories */}
+      <Text style={styles.categoryTitle}>Category</Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryScroll}>
+        <View style={styles.category}>
+          <Image source={require('../assets/veggies_icon.png')} style={styles.categoryIcon} />
+          <Text style={styles.categoryText}>Vegetables</Text>
         </View>
-
-        {/* Carousel 2 */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Communicate and rate your supplier:</Text>
-          <Carousel
-            data={data.slice(4)} // Remaining items
-            renderItem={renderItem}
-            sliderWidth={350}
-            itemWidth={300}
-            loop={true}
-            layout={'default'}
-          />
+        <View style={styles.category}>
+          <Image source={require('../assets/eggs.png')} style={styles.categoryIcon} />
+          <Text style={styles.categoryText}>Eggs</Text>
         </View>
+        <View style={styles.category}>
+          <Image source={require('../assets/milk.jpg')} style={styles.categoryIcon} />
+          <Text style={styles.categoryText}>Milk</Text>
+        </View>
+        <View style={styles.category}>
+          <Image source={require('../assets/meat1.jpg')} style={styles.categoryIcon} />
+          <Text style={styles.categoryText}>Meat</Text>
+        </View>
+        <View style={styles.category}>
+          <Image source={require('../assets/cereals.jpg')} style={styles.categoryIcon} />
+          <Text style={styles.categoryText}>Cereals</Text>
+        </View>
+      </ScrollView>
 
-        {/* Footer */}
-        <View style={styles.footer}>
-          <TouchableOpacity>
-            <Image source={require('../assets/menu.png')} style={styles.footerIcon} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image source={require('../assets/home.png')} style={styles.footerIcon} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image source={require('../assets/user.png')} style={styles.footerIcon} />
-          </TouchableOpacity>
+      {/* Products Grid */}
+      <View style={styles.productsContainer}>
+        <View style={styles.productCard}>
+          <Image source={require('../assets/Spinach.png')} style={styles.productImage} />
+          <Text style={styles.productName}>Spinach</Text>
+          <Text style={styles.productPrice}>Ksh.120</Text>
+        </View>
+        <View style={styles.productCard}>
+          <Image source={require('../assets/eggs.jpeg')} style={styles.productImage} />
+          <Text style={styles.productName}>Eggs</Text>
+          <Text style={styles.productPrice}>Ksh.300</Text>
+        </View>
+        <View style={styles.productCard}>
+          <Image source={require('../assets/milk1.jpg')} style={styles.productImage} />
+          <Text style={styles.productName}>Milk</Text>
+          <Text style={styles.productPrice}>Ksh.140</Text>
+        </View>
+        <View style={styles.productCard}>
+          <Image source={require('../assets/beef.jpeg')} style={styles.productImage} />
+          <Text style={styles.productName}>Beef</Text>
+          <Text style={styles.productPrice}>Ksh.500</Text>
         </View>
       </View>
-    </ImageBackground>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
   container: {
     flex: 1,
+    backgroundColor: '#7DB61D',
     padding: 10,
   },
   header: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
   },
-  logo: {
-    width: 50,
-    height: 50,
-    marginRight: 10,
-  },
-  headerText: {
+  title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: 'white',
-    flex: 1,
+    color: '#fff',
   },
-  cartIcon: {
-    paddingRight: 10,
-  },
-  cartImage: {
-    width: 30,
-    height: 30,
+  cartButton: {
+    padding: 10,
   },
   searchContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
     borderRadius: 20,
-    paddingHorizontal: 10,
-    marginBottom: 20,
-  },
-  searchIcon: {
-    width: 20,
-    height: 20,
-    marginRight: 10,
-  },
-  searchBar: {
-    flex: 1,
-    height: 40,
-  },
-  section: {
-    marginBottom: 30,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white',
-    marginBottom: 10,
-  },
-  carouselItem: {
-    justifyContent: 'center',
+    padding: 10,
+    marginTop: 15,
     alignItems: 'center',
   },
-  carouselImage: {
-    width: 250,
-    height: 150,
-    borderRadius: 10,
-  },
-  carouselCaption: {
-    marginTop: 5,
-    color: 'white',
+  searchInput: {
+    flex: 1,
     fontSize: 16,
   },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    backgroundColor: 'white',
-    paddingVertical: 10,
+  categoryTitle: {
+    fontSize: 18,
+    color: '#fff',
+    marginTop: 20,
+    fontWeight: 'bold',
   },
-  footerIcon: {
-    width: 30,
-    height: 30,
+  categoryScroll: {
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  category: {
+    alignItems: 'center',
+    marginRight: 20,
+  },
+  categoryText: {
+    marginTop: 5,
+    color: '#fff',
+    fontSize: 14,
+  },
+  productsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  productCard: {
+    width: width * 0.4,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  productName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#7DB61D',
+  },
+  productPrice: {
+    fontSize: 14,
+    color: '#7DB61D',
+    marginTop: 5,
   },
 });
 

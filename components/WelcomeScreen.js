@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ImageBackground, Dimensions } from 'react-native';
+
+// Get the screen dimensions
+const { width, height } = Dimensions.get('window');
 
 const WelcomeScreen = ({ navigation }) => {
   return (
     <ImageBackground
-      source={require('../assets/b1.png')} // Replace with your background image path
+      source={require('../assets/b1.png')} // Background image
       style={styles.background}
+      imageStyle={{ resizeMode: 'cover' }} // Ensure the image covers the entire screen
     >
       <View style={styles.overlay}>
         <Text style={styles.welcomeText}>Welcome to</Text>
@@ -24,15 +28,15 @@ const WelcomeScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   background: {
-    flex: 1,
-    resizeMode: 'cover', // This ensures the image covers the screen
+    width: width, // Full screen width
+    height: height, // Full screen height
     justifyContent: 'center', // Centers the content vertically
   },
   overlay: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adds a dark overlay for better text visibility
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Dark overlay for better contrast with the text
   },
   welcomeText: {
     fontSize: 30,
